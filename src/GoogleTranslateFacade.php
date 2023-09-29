@@ -11,6 +11,6 @@ class GoogleTranslateFacade extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        return 'laravel-google-translate';
+        return 'lg-translater';
     }
 }
