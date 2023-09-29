@@ -52,7 +52,7 @@ class GoogleTranslateClient
 
     private function checkForInvalidConfiguration(array $config)
     {
-        if ( ! isset($config['api_key']) || $config['api_key'] === null) {
+        if(!isset($config['api_key']) || $config['api_key'] === null) {
             throw new Exception('Google Api Key is required.');
         }
 
@@ -62,7 +62,7 @@ class GoogleTranslateClient
             && ctype_lower($codeInConfig)
             && in_array($codeInConfig, $this->languages());
 
-        if ( ! $languageCodeIsValid) {
+        if (!$languageCodeIsValid) {
             throw new Exception(
                 'The default_target_translation value in the config/googletranslate.php file should
                 be a valid lowercase ISO 639-1 code of the language'
