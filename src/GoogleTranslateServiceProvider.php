@@ -39,6 +39,6 @@ class GoogleTranslateServiceProvider extends ServiceProvider
             return new GoogleTranslate($client);
         });
 
-        $this->app->alias(GoogleTranslate::class, 'laravel-google-translate');
+        $this->app->alias(GoogleTranslate::class, 'lg-translater');
     }
 }
