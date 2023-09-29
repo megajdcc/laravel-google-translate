@@ -1,10 +1,10 @@
 <?php
 
-namespace JoggApp\GoogleTranslate\Tests;
+namespace Megajdcc\GoogleTranslate\Tests;
 
 use Illuminate\Support\Facades\Config;
-use JoggApp\GoogleTranslate\GoogleTranslate;
-use JoggApp\GoogleTranslate\GoogleTranslateClient;
+use Megajdcc\GoogleTranslate\GoogleTranslate;
+use Megajdcc\GoogleTranslate\GoogleTranslateClient;
 use Mockery;
 use Orchestra\Testbench\TestCase as BaseTestCase;
 
@@ -16,19 +16,18 @@ class GoogleTranslateTest extends BaseTestCase
     private $translateClient;
 
     private $translate;
+   
 
-    public function __construct()
-    {
-        parent::__construct();
-
+    public function cargar(){
         $this->translateClient = Mockery::mock(GoogleTranslateClient::class);
-
         $this->translate = new GoogleTranslate($this->translateClient);
     }
+
 
     /** @test */
     public function it_can_detect_the_language_of_string_passed_to_it()
     {
+       $this->cargar();
         $this->translateClient
             ->shouldReceive('detectLanguage')->with($this->testString)
             ->once()
@@ -46,6 +45,9 @@ class GoogleTranslateTest extends BaseTestCase
     /** @test */
     public function it_can_detect_the_language_of_an_array_of_strings_passed_to_it()
     {
+        $this->cargar();
+
+
         $this->translateClient
             ->shouldReceive('detectLanguageBatch')->with([$this->testString, $this->testString])
             ->once()
@@ -69,6 +71,8 @@ class GoogleTranslateTest extends BaseTestCase
     /** @test */
     public function it_can_translate_the_string_passed_to_it()
     {
+        $this->cargar();
+
         $this->translateClient
             ->shouldReceive('translate')->with($this->testString, 'en', 'hi', 'text')
             ->once()
@@ -87,6 +91,8 @@ class GoogleTranslateTest extends BaseTestCase
     /** @test */
     public function it_can_translate_the_html_string_passed_to_it()
     {
+        $this->cargar();
+
         $this->translateClient
             ->shouldReceive('translate')->with($this->testHtmlString, 'en', 'hi', 'html')
             ->once()
@@ -105,6 +111,8 @@ class GoogleTranslateTest extends BaseTestCase
     /** @test */
     public function it_can_translate_an_array_of_strings_passed_to_it()
     {
+        $this->cargar();
+
         $this->translateClient
             ->shouldReceive('translateBatch')->with([$this->testString, $this->testString], 'en', 'hi', 'text')
             ->once()
@@ -130,6 +138,8 @@ class GoogleTranslateTest extends BaseTestCase
     /** @test */
     public function test_the_just_translate_method_returns_just_the_translated_string()
     {
+        $this->cargar();
+
         $this->translateClient
             ->shouldReceive('translate')->with($this->testString, 'en', 'hi')
             ->once()
@@ -143,6 +153,8 @@ class GoogleTranslateTest extends BaseTestCase
     /** @test */
     public function test_the_unless_language_is_method_does_not_translate_the_language_of_given_text_if_it_is_same_as_defined_in_that_method()
     {
+        $this->cargar();
+
         $this->translateClient
             ->shouldReceive('detectLanguage')->with($this->testString)
             ->once()
@@ -156,6 +168,8 @@ class GoogleTranslateTest extends BaseTestCase
     /** @test */
     public function test_the_unless_language_is_method_translates_the_language_of_given_text_only_if_it_is_same_as_defined_in_that_method()
     {
+        $this->cargar();
+
         $this->translateClient
             ->shouldReceive('detectLanguage')->with($this->testString)
             ->once()
@@ -179,6 +193,8 @@ class GoogleTranslateTest extends BaseTestCase
     /** @test */
     public function it_sanitizes_the_language_codes()
     {
+        $this->cargar();
+
         $response = $this->translate->sanitizeLanguageCode('en');
         $this->assertEquals('en', $response);
 
@@ -202,6 +218,8 @@ class GoogleTranslateTest extends BaseTestCase
     /** @test */
     public function it_validates_input_against_null_strings()
     {
+        $this->cargar();
+
         $this->expectException(\InvalidArgumentException::class);
         $this->translate->translate(null, 'en');
         $this->translate->justTranslate(null, 'en');
@@ -210,6 +228,8 @@ class GoogleTranslateTest extends BaseTestCase
     /** @test */
     public function it_validates_input_against_null_strings_in_a_batch()
     {
+        $this->cargar();
+
         $this->expectException(\InvalidArgumentException::class);
         $this->translate->translateBatch([null, null], 'en', 'hi');
     }
@@ -217,6 +237,8 @@ class GoogleTranslateTest extends BaseTestCase
     /** @test */
     public function it_validates_input_agaisnt_null_strings_when_detecting_a_language()
     {
+        $this->cargar();
+
         $this->expectException(\InvalidArgumentException::class);
         $this->translate->detectLanguage(null);
         $this->translate->detectLanguage([null, null]);

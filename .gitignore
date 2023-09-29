@@ -5,3 +5,5 @@ Thumbs.db
 phpunit.xml
 /.idea
 .phpunit.result.cache
+.phpunit.cache
+phpunit.xml.dist.bak

@@ -1,5 +1,8 @@
 All the notable changes to the Laravel Google Translate package are documented in this file:
-
+## 9.1 (29-9-2023)
+- Fork Repo for [Jhonatan Crespo](https://github.com/megajdcc)
+- Update version php to 8.2 
+- Update version phpunit to 10.3
 ## 9.0 (1-1-2023)
 - Change method name (fix typo)
 

@@ -1,11 +1,11 @@
 <?php
 
-namespace JoggApp\GoogleTranslate;
+namespace Megajdcc\GoogleTranslate;
 
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @see \JoggApp\GoogleTranslate\GoogleTranslate
+ * @see \Megajdcc\GoogleTranslate\GoogleTranslate
  */
 class GoogleTranslateFacade extends Facade
 {
