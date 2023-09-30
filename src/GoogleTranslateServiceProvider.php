@@ -38,7 +38,7 @@ class GoogleTranslateServiceProvider extends ServiceProvider
 
             return new GoogleTranslate($client);
         });
-
+        
         $this->app->alias(GoogleTranslate::class, 'lg-translater');
     }
 }
