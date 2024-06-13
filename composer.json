@@ -32,7 +32,7 @@
     "require": {
         "php": "^8.2|^8.3",
         "google/cloud-translate": "^1.2",
-        "illuminate/support": "11.10.0"
+        "illuminate/support": "^11.10"
     },
     "require-dev": {
         "mockery/mockery": "^1.6",
