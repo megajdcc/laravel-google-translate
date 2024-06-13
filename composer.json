@@ -23,17 +23,20 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Megajdcc\\GoogleTranslate\\Tests\\": "tests"
+            "Megajdcc\\GoogleTranslate\\Tests\\": "tests",
+            "Workbench\\App\\": "workbench/app/",
+            "Workbench\\Database\\Factories\\": "workbench/database/factories/",
+            "Workbench\\Database\\Seeders\\": "workbench/database/seeders/"
         }
     },
     "require": {
         "php": "^8.2|^8.3",
         "google/cloud-translate": "^1.2",
-        "illuminate/support": "^11.10"
+        "illuminate/support": "11.10.0"
     },
     "require-dev": {
         "mockery/mockery": "^1.6",
-        "orchestra/testbench" : "9.1.2",
+        "orchestra/testbench": "9.1.2",
         "phpunit/phpunit": "^10.3"
     },
     "extra": {
@@ -41,7 +44,7 @@
             "providers": [
                 "Megajdcc\\GoogleTranslate\\GoogleTranslateServiceProvider"
             ],
-            "aliases":{
+            "aliases": {
                 "GoogleTranslate": "Megajdcc\\GoogleTranslate\\GoogleTranslateFacade"
             }
         }
@@ -50,5 +53,25 @@
         "sort-packages": true
     },
     "minimum-stability": "dev",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "scripts": {
+        "post-autoload-dump": [
+            "@clear",
+            "@prepare"
+        ],
+        "clear": "@php vendor/bin/testbench package:purge-skeleton --ansi",
+        "prepare": "@php vendor/bin/testbench package:discover --ansi",
+        "build": "@php vendor/bin/testbench workbench:build --ansi",
+        "serve": [
+            "Composer\\Config::disableProcessTimeout",
+            "@build",
+            "@php vendor/bin/testbench serve"
+        ],
+        "lint": [
+            "@php vendor/bin/phpstan analyse"
+        ],
+        "test": [
+            "@php vendor/bin/phpunit"
+        ]
+    }
 }

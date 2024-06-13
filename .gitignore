@@ -7,3 +7,5 @@ phpunit.xml
 .phpunit.result.cache
 .phpunit.cache
 phpunit.xml.dist.bak
+/workbench/*
+testbench.yaml
